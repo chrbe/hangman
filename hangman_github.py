@@ -12,9 +12,7 @@ def hangman(): #creates the 2D list for appending the man
 		x.append(height)
 	return x
 
-board = hangman() 
-
-# print(board)
+board = hangman() #creates variable containing the hangman
 
 def drawing(): #print out the drawing of the board 
 	
@@ -23,13 +21,7 @@ def drawing(): #print out the drawing of the board
 	for y in range(10):
 		height=[ ' '.format(elem) for elem in range(10)]
 		print('|' +''.join(height))
-		# for first_digit in range(10):
-		# 	height.append(" ")
 		x.append(height)
-	# print(x) 
-
-drawing()
-
 
 def drawing_man(attempt_counter): #wrong attempt results in drawing the man
 	print('-' * 10)
@@ -153,7 +145,7 @@ def drawing_man(attempt_counter): #wrong attempt results in drawing the man
 			board[5][7] = "-"
 			print('|' + ''.join(line))
 
-def user_input(): #gets user input 
+def user_input(): #gets user input as a letter
 	
 	while True:
 		user_q = (input("Guess a letter?: ").strip()).lower()
@@ -166,12 +158,14 @@ def user_input(): #gets user input
 			break
 	return user_q
 
-correct_letters = []
+correct_letters = [] #stores correct letters guessed
 
-def play():
-
+def play(): #loop for playing the game
+	
+	drawing() #prints out drawing for the initial part of the game
 	print("Let\'s play Hangman!")
-	print("Guess this word: (Hang on a few seconds..)")
+	print("You will have 7 attempts which draws out the hangman before you fail.")
+	print("Guess this word: (Picking random word..)")
 
 	#generates random word and print out the underscores here
 
@@ -223,6 +217,7 @@ def play():
 			
 			guess = "".join(guessing_list1)
 			print("".join(guessing_list))
+			print("\"" + user_a + "\"" + " is in the word.")
 			if guess == word:
 				print("You win!")
 				break
@@ -234,21 +229,21 @@ def play():
 
 			if m in attempts:
 				
-				print("Oops, wrong letter, guess again. Extending the hangman...")
+				print("Oops, letter was not in word. Guess again. Extending the hangman...")
 				drawing_man(m)
 				 
 				if m == 7:
 					print("You have lost!")
-					print("The word was " + word + ".")
+					print("The word was \"" + word + "\".")
 					break
 
 				m += 1
 
 
-if __name__ == "__main__":
+if __name__ == "__main__": 
 	while True:
 		play()
-		quit = (input("Would you like to try again? Type 'y' or 'n: ").strip()).lower()
+		quit = (input("Would you like to try again? Type 'y' or 'n': ").strip()).lower()
 		if quit.lower() == "n":
 			print("Thanks for playing!")
 			break
